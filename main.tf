@@ -43,6 +43,14 @@ resource "aws_default_vpc" "default" {
   }
 }
 
+resource "aws_default_subnet" "default_az1" {
+  availability_zone = "us-west-2a"
+
+  tags = {
+    Name = "Default subnet for us-west-2a"
+  }
+}
+
 resource "aws_security_group" "web-sg" {
   name = "${random_pet.sg.id}-sg"
   ingress {
