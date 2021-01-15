@@ -37,6 +37,13 @@ resource "aws_instance" "web" {
               EOF
 }
 
+resource "aws_default_vpc" "default" {
+  tags = {
+    Name = "Default VPC"
+    id = "vpc-031f01a68158f18e8"
+  }
+}
+
 resource "aws_security_group" "web-sg" {
   name = "${random_pet.sg.id}-sg"
   ingress {
