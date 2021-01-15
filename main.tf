@@ -37,18 +37,12 @@ resource "aws_instance" "web" {
               EOF
 }
 
-resource "aws_default_vpc" "default" {
-  tags = {
-    Name = "Default VPC"
-  }
+data "aws_vpc" "default" {
+  default = true
 }
 
-resource "aws_default_subnet" "default_az1" {
-  availability_zone = "us-west-2a"
-
-  tags = {
-    Name = "Default subnet for us-west-2a"
-  }
+data "aws_subnet_ids" "all" {
+  vpc_id = data.aws_vpc.default.id
 }
 
 resource "aws_security_group" "web-sg" {
